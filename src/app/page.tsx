@@ -1,69 +1,45 @@
-import Image from "next/image";
+import Link from "next/link";
+import QuestionBrowser from "@/components/QuestionBrowser";
+
+const tools = [
+  { href: "/assessment", emoji: "📊", title: "영양 종합 평가", desc: "식습관·생활습관으로 부족하기 쉬운 영양소를 점검" },
+  { href: "/my", emoji: "🎯", title: "맞춤 정보·추천", desc: "내 기준 섭취량과 검토해 볼 성분, 약 관련 주의사항" },
+  { href: "/compare", emoji: "⚖️", title: "내 기준 제품 비교", desc: "하루 비용, 함량, 함께 먹을 때 상한 초과 여부 계산" },
+  { href: "/ingredients", emoji: "🧪", title: "성분·원료 정보", desc: "기능성, 섭취 기준, 원료 형태별 차이와 주의사항" },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div>
+      <section className="mb-8">
+        <h1 className="text-2xl font-bold leading-snug sm:text-3xl">
+          영양제 살 때 궁금한 것,
+          <br />
+          <span className="text-accent">어디서 확인해야 할지</span> 알려드려요
+        </h1>
+        <p className="mt-3 max-w-2xl leading-relaxed text-muted">
+          효과, 부작용, 약과 같이 먹어도 되는지, 정품인지… 질문마다 무엇을 확인하고 어떤
+          공공기관·자료를 보면 되는지 정리했습니다.
+        </p>
+      </section>
+
+      <ul className="mb-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {tools.map((tool) => (
+          <li key={tool.href}>
+            <Link
+              href={tool.href}
+              className="flex h-full flex-col rounded-xl border border-border bg-surface p-5 transition-colors hover:border-accent"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+              <span className="text-2xl">{tool.emoji}</span>
+              <span className="mt-2 font-bold">{tool.title}</span>
+              <span className="mt-1 text-sm leading-relaxed text-muted">{tool.desc}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+
+      <h2 className="mb-4 text-xl font-bold">자주 하는 질문</h2>
+      <QuestionBrowser />
     </div>
   );
 }
